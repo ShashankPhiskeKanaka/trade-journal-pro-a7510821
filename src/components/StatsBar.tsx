@@ -9,10 +9,12 @@ interface StatsBarProps {
 const StatsBar = ({ trades: rawTrades }: StatsBarProps) => {
   const trades = Array.isArray(rawTrades) ? rawTrades : [];
   const totalPL = trades.reduce(
-    (sum, t) => sum + (t.sellValue - t.buyValue) * t.quantity,
+    (sum, t) => sum + (t.sellVal - t.buyVal) * t.quantity,
     0
   );
-  const winners = trades.filter((t) => (t.sellValue - t.buyValue) * t.quantity >= 0).length;
+  const totalCharges = trades.reduce((char, t) => char + t.charges, 0);
+  const finalPL = totalPL - totalCharges;
+  const winners = trades.filter((t) => (t.sellVal - t.buyVal) * t.quantity >= 0).length;
   const winRate = trades.length > 0 ? ((winners / trades.length) * 100).toFixed(1) : "0";
 
   const stats = [
@@ -23,10 +25,22 @@ const StatsBar = ({ trades: rawTrades }: StatsBarProps) => {
       color: "text-primary",
     },
     {
-      label: "Net P/L",
+      label: "P/L",
       value: `${totalPL >= 0 ? "+" : "-"}₹${Math.abs(totalPL).toFixed(2)}`,
       icon: totalPL >= 0 ? TrendingUp : TrendingDown,
       color: totalPL >= 0 ? "text-profit" : "text-loss",
+    },
+    {
+      label: "Charges",
+      value: `${totalCharges >= 0 ? "-" : "+"}₹${Math.abs(totalCharges).toFixed(2)}`,
+      icon: totalCharges >= 0 ? TrendingDown : TrendingUp,
+      color: totalCharges >= 0 ? "text-loss" : "text-profit",
+    },
+    {
+      label: "Net P/L",
+      value: `${finalPL >= 0 ? "+" : "-"}₹${Math.abs(finalPL).toFixed(2)}`,
+      icon: finalPL >= 0 ? TrendingUp : TrendingDown,
+      color: finalPL >= 0 ? "text-profit" : "text-loss",
     },
     {
       label: "Win Rate",

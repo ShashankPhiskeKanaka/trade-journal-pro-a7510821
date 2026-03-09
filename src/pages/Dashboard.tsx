@@ -32,6 +32,7 @@ const Dashboard = () => {
 
   const handleDelete = async (id: string) => {
     setDeletingId(id);
+    console.log(id);
     try {
       await deleteTrade.mutateAsync(id);
       toast.success("Trade deleted");

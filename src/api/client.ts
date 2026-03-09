@@ -32,9 +32,8 @@ export const tradeApi = {
     }),
   
   delete: (id: string) =>
-    request<void>("/trade", {
+    request<void>(`/trade/${id}`, {
       method: "DELETE",
-      body: JSON.stringify({ id }),
     }),
 };
 

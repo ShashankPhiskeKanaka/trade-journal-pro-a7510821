@@ -15,8 +15,8 @@ interface TradeFormProps {
 const TradeForm = ({ onSubmit, onClose, loading, initialData }: TradeFormProps) => {
   const [form, setForm] = useState<TradeCreatePayload>({
     name: initialData?.name || "",
-    buyValue: initialData?.buyValue || 0,
-    sellValue: initialData?.sellValue || 0,
+    buyVal: initialData?.buyVal || 0,
+    sellVal: initialData?.sellVal || 0,
     quantity: initialData?.quantity || 0,
     date: initialData?.date || new Date().toISOString().split("T")[0],
     buyTime: initialData?.buyTime || "",
@@ -34,8 +34,8 @@ const TradeForm = ({ onSubmit, onClose, loading, initialData }: TradeFormProps) 
 
   const fields: { key: keyof TradeCreatePayload; label: string; type: string; step?: string }[] = [
     { key: "name", label: "Trade Name", type: "text" },
-    { key: "buyValue", label: "Buy Value", type: "number", step: "0.01" },
-    { key: "sellValue", label: "Sell Value", type: "number", step: "0.01" },
+    { key: "buyVal", label: "Buy Value", type: "number", step: "0.01" },
+    { key: "sellVal", label: "Sell Value", type: "number", step: "0.01" },
     { key: "quantity", label: "Quantity", type: "number", step: "1" },
     { key: "date", label: "Date", type: "date" },
     { key: "buyTime", label: "Buy Time", type: "time" },
