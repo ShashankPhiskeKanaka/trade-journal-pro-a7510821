@@ -21,9 +21,9 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export const tradeApi = {
-  getAll: () => request<Trade[]>("/trade"),
+  getAll: () => request<{ data: Trade[] }>("/trade").then((res) => res.data),
   
-  getById: (id: string) => request<Trade>(`/trade/${id}`),
+  getById: (id: string) => request<{ data: Trade }>(`/trade/${id}`).then((res) => res.data),
   
   create: (data: TradeCreatePayload) =>
     request<Trade>("/trade", {
