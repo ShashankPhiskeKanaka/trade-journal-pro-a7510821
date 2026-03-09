@@ -6,7 +6,8 @@ interface StatsBarProps {
   trades: Trade[];
 }
 
-const StatsBar = ({ trades }: StatsBarProps) => {
+const StatsBar = ({ trades: rawTrades }: StatsBarProps) => {
+  const trades = Array.isArray(rawTrades) ? rawTrades : [];
   const totalPL = trades.reduce(
     (sum, t) => sum + (t.sellValue - t.buyValue) * t.quantity,
     0
