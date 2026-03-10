@@ -9,12 +9,12 @@ interface StatsBarProps {
 const StatsBar = ({ trades: rawTrades }: StatsBarProps) => {
   const trades = Array.isArray(rawTrades) ? rawTrades : [];
   const totalPL = trades.reduce(
-    (sum, t) => sum + (t.sellVal - t.buyVal) * t.quantity,
+    (sum, t) => sum + (t.sellval - t.buyval) * t.quantity,
     0
   );
-  const totalCharges = trades.reduce((char, t) => char + t.charges, 0);
+  const totalCharges = trades.reduce((char, t) => char + (t.charges || 0), 0);
   const finalPL = totalPL - totalCharges;
-  const winners = trades.filter((t) => (t.sellVal - t.buyVal) * t.quantity >= 0).length;
+  const winners = trades.filter((t) => (t.sellval - t.buyval) * t.quantity >= 0).length;
   const winRate = trades.length > 0 ? ((winners / trades.length) * 100).toFixed(1) : "0";
 
   const stats = [

@@ -7,7 +7,7 @@ import TradeTable from "@/components/TradeTable";
 import TradeForm from "@/components/TradeForm";
 import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
-import { Plus, LogOut, TrendingUp, RefreshCw } from "lucide-react";
+import { Plus, LogOut, TrendingUp, RefreshCw, History } from "lucide-react";
 import { toast } from "sonner";
 import { TradeCreatePayload } from "@/types/trade";
 
