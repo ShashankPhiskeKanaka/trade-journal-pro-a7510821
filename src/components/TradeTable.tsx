@@ -39,31 +39,28 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
                   className="group border-b border-border/30 transition-colors hover:bg-secondary/30"
                 >
                   <td className="px-4 py-3 font-medium">{trade.name}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.buyVal.toFixed(2)}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.sellVal.toFixed(2)}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.buyval.toFixed(2)}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.sellval.toFixed(2)}</td>
                   <td className="px-4 py-3 font-mono-nums text-sm">{trade.quantity}</td>
                   
-                  {/* Gross P/L (Unrealised) */}
                   <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">
-                    ₹{trade.unrealisedgains.toFixed(2)}
+                    ₹{(trade.unrealisedgains ?? 0).toFixed(2)}
                   </td>
 
-                  {/* Charges */}
                   <td className="px-4 py-3 font-mono-nums text-sm text-destructive/80">
-                    -₹{trade.charges.toFixed(2)}
+                    -₹{(trade.charges ?? 0).toFixed(2)}
                   </td>
 
-                  {/* Net P/L (Realised Gains) */}
                   <td className={`px-4 py-3 font-mono-nums text-sm font-bold ${isProfit ? "text-profit" : "text-loss"}`}>
                     <span className="inline-flex items-center gap-1">
                       {isProfit ? <TrendingUp className="h-3.5 w-3.5" /> : <TrendingDown className="h-3.5 w-3.5" />}
-                      ₹{Math.abs(trade.realisedgains).toFixed(2)}
+                      ₹{Math.abs(trade.realisedgains ?? 0).toFixed(2)}
                     </span>
                   </td>
 
                   <td className="px-4 py-3 text-sm text-muted-foreground">{new Date(trade.date).toLocaleDateString()}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.buyTime}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.sellTime}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.buytime}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.selltime}</td>
                   
                   <td className="px-4 py-3 text-right">
                     <Button
