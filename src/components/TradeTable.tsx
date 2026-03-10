@@ -10,8 +10,6 @@ interface TradeTableProps {
 }
 
 const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
-  // ... (No changes to empty state)
-
   return (
     <div className="glass-card overflow-hidden rounded-2xl">
       {/* Desktop Table */}
@@ -19,7 +17,6 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
         <table className="w-full">
           <thead>
             <tr className="border-b border-border/50">
-              {/* Added Charges and Net P/L to headers */}
               {["Name", "Buy", "Sell", "Qty", "P/L", "Charges", "Net P/L", "Date", "Buy Time", "Sell Time", ""].map((h) => (
                 <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {h}
@@ -29,7 +26,7 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
           </thead>
           <tbody>
             {trades.map((trade, i) => {
-              const isProfit = trade.realisedgains >= 0;
+              const isProfit = (trade.realisedgains ?? 0) >= 0;
               return (
                 <motion.tr
                   key={trade._id}
@@ -39,8 +36,8 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
                   className="group border-b border-border/30 transition-colors hover:bg-secondary/30"
                 >
                   <td className="px-4 py-3 font-medium">{trade.name}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.buyval.toFixed(2)}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.sellval.toFixed(2)}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.buyVal.toFixed(2)}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm">₹{trade.sellVal.toFixed(2)}</td>
                   <td className="px-4 py-3 font-mono-nums text-sm">{trade.quantity}</td>
                   
                   <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">
@@ -59,8 +56,8 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
                   </td>
 
                   <td className="px-4 py-3 text-sm text-muted-foreground">{new Date(trade.date).toLocaleDateString()}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.buytime}</td>
-                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.selltime}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.buyTime}</td>
+                  <td className="px-4 py-3 font-mono-nums text-sm text-muted-foreground">{trade.sellTime}</td>
                   
                   <td className="px-4 py-3 text-right">
                     <Button
@@ -83,34 +80,34 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
       {/* Mobile Cards */}
       <div className="space-y-3 p-4 md:hidden">
         {trades.map((trade, i) => {
-          const isProfit = trade.realisedgains >= 0;
+          const isProfit = (trade.realisedgains ?? 0) >= 0;
           return (
             <motion.div
               key={trade._id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className={`rounded-xl border p-4 bg-background/50 border-border/50`}
+              className="rounded-xl border p-4 bg-background/50 border-border/50"
             >
               <div className="mb-3 flex items-center justify-between border-b border-border/30 pb-2">
                 <span className="font-semibold">{trade.name}</span>
                 <div className="text-right">
                   <div className={`text-lg font-bold leading-none ${isProfit ? "text-profit" : "text-loss"}`}>
-                    {isProfit ? "+" : "-"}₹{Math.abs(trade.realisedgains).toFixed(2)}
+                    {isProfit ? "+" : "-"}₹{Math.abs(trade.realisedgains ?? 0).toFixed(2)}
                   </div>
                   <span className="text-[10px] uppercase text-muted-foreground">Net P/L</span>
                 </div>
               </div>
               
               <div className="grid grid-cols-2 gap-y-2 text-sm">
-                <div className="text-muted-foreground">Buy: <span className="font-mono-nums text-foreground">₹{trade.buyval.toFixed(2)}</span></div>
-                <div className="text-muted-foreground">Sell: <span className="font-mono-nums text-foreground">₹{trade.sellval.toFixed(2)}</span></div>
+                <div className="text-muted-foreground">Buy: <span className="font-mono-nums text-foreground">₹{trade.buyVal.toFixed(2)}</span></div>
+                <div className="text-muted-foreground">Sell: <span className="font-mono-nums text-foreground">₹{trade.sellVal.toFixed(2)}</span></div>
                 <div className="text-muted-foreground">Charges: <span className="font-mono-nums text-destructive/80">₹{(trade.charges ?? 0).toFixed(2)}</span></div>
                 <div className="text-muted-foreground">Qty: <span className="font-mono-nums text-foreground">{trade.quantity}</span></div>
               </div>
 
               <div className="mt-4 flex items-center justify-between border-t border-border/30 pt-3">
-                <span className="text-xs text-muted-foreground">{new Date(trade.date).toLocaleDateString()} • {trade.buytime}</span>
+                <span className="text-xs text-muted-foreground">{new Date(trade.date).toLocaleDateString()} • {trade.buyTime}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -128,6 +125,5 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
     </div>
   );
 };
-
 
 export default TradeTable;

@@ -22,8 +22,8 @@ const Dashboard = () => {
 
   const todayTrades = useMemo(() => {
     const now = new Date();
-    const today = `${String(now.getDate()).padStart(2, "0")}-${String(now.getMonth() + 1).padStart(2, "0")}-${now.getFullYear()}`;
-    return trades.filter((t) => t.date === today);
+    const todayStr = now.toISOString().split("T")[0];
+    return trades.filter((t) => t.date.split("T")[0] === todayStr);
   }, [trades]);
 
   const handleCreate = async (data: TradeCreatePayload) => {
