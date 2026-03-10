@@ -92,6 +92,14 @@ const Dashboard = () => {
               <RefreshCw className="mr-1.5 h-4 w-4" /> Refresh
             </Button>
             <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/trades")}
+              className="border-border text-muted-foreground hover:bg-secondary"
+            >
+              <History className="mr-1.5 h-4 w-4" /> All Trades
+            </Button>
+            <Button
               size="sm"
               onClick={() => setShowForm(true)}
               className="bg-primary font-semibold text-primary-foreground hover:bg-primary/90"
