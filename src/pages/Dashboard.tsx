@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useTrades, useCreateTrade, useDeleteTrade } from "@/hooks/useTrades";
 import { useNavigate } from "react-router-dom";
