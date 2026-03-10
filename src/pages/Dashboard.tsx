@@ -20,6 +20,14 @@ const Dashboard = () => {
   const createTrade = useCreateTrade();
   const deleteTrade = useDeleteTrade();
 
+  const todayTrades = useMemo(() => {
+    const today = new Date().toISOString().split("T")[0];
+    return trades.filter((t) => {
+      const tradeDate = new Date(t.date).toISOString().split("T")[0];
+      return tradeDate === today;
+    });
+  }, [trades]);
+
   const handleCreate = async (data: TradeCreatePayload) => {
     try {
       await createTrade.mutateAsync(data);
