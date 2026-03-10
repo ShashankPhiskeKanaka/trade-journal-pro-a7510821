@@ -78,7 +78,7 @@ const Dashboard = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight sm:text-2xl">Investment Logger</h1>
-              <p className="text-sm text-muted-foreground">Track & analyze your trades</p>
+              <p className="text-sm text-muted-foreground">Today's trades</p>
             </div>
           </div>
 
