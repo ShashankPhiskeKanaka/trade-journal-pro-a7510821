@@ -103,14 +103,14 @@ const TradeTable = ({ trades, onDelete, deleting }: TradeTableProps) => {
               </div>
               
               <div className="grid grid-cols-2 gap-y-2 text-sm">
-                <div className="text-muted-foreground">Buy: <span className="font-mono-nums text-foreground">₹{trade.buyVal.toFixed(2)}</span></div>
-                <div className="text-muted-foreground">Sell: <span className="font-mono-nums text-foreground">₹{trade.sellVal.toFixed(2)}</span></div>
-                <div className="text-muted-foreground">Charges: <span className="font-mono-nums text-destructive/80">₹{trade.charges.toFixed(2)}</span></div>
+                <div className="text-muted-foreground">Buy: <span className="font-mono-nums text-foreground">₹{trade.buyval.toFixed(2)}</span></div>
+                <div className="text-muted-foreground">Sell: <span className="font-mono-nums text-foreground">₹{trade.sellval.toFixed(2)}</span></div>
+                <div className="text-muted-foreground">Charges: <span className="font-mono-nums text-destructive/80">₹{(trade.charges ?? 0).toFixed(2)}</span></div>
                 <div className="text-muted-foreground">Qty: <span className="font-mono-nums text-foreground">{trade.quantity}</span></div>
               </div>
 
               <div className="mt-4 flex items-center justify-between border-t border-border/30 pt-3">
-                <span className="text-xs text-muted-foreground">{new Date(trade.date).toLocaleDateString()} • {trade.buyTime}</span>
+                <span className="text-xs text-muted-foreground">{new Date(trade.date).toLocaleDateString()} • {trade.buytime}</span>
                 <Button
                   variant="ghost"
                   size="sm"
