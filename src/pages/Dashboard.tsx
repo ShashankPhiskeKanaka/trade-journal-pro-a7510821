@@ -124,7 +124,7 @@ const Dashboard = () => {
           transition={{ delay: 0.15 }}
           className="mb-6"
         >
-          <StatsBar trades={trades} />
+          <StatsBar trades={todayTrades} />
         </motion.div>
 
         {/* Trade Table */}
@@ -138,7 +138,7 @@ const Dashboard = () => {
               <RefreshCw className="h-6 w-6 animate-spin text-primary" />
             </div>
           ) : (
-            <TradeTable trades={trades} onDelete={handleDelete} deleting={deletingId} />
+            <TradeTable trades={todayTrades} onDelete={handleDelete} deleting={deletingId} />
           )}
         </motion.div>
       </div>
