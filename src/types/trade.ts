@@ -1,27 +1,25 @@
 export interface Trade {
   _id: string;
   name: string;
-  buyVal: number;
-  sellVal: number;
+  buyval: number;
+  sellval: number;
   quantity: number;
   date: string;
-  buyTime: string;
-  sellTime: string;
-  // New calculated fields from backend
-  unrealisedgains: number; // Gross P/L before charges
-  charges: number;         // Total taxes + brokerage
-  realisedgains: number;   // Net P/L (Final profit/loss)
+  buytime: string;
+  selltime: string;
+  unrealisedgains?: number;
+  charges?: number;
+  realisedgains?: number;
 }
-
 
 export interface TradeCreatePayload {
   name: string;
-  buyVal: number;
-  sellVal: number;
+  buyval: number;
+  sellval: number;
   quantity: number;
   date: string;
-  buyTime: string;
-  sellTime: string;
+  buytime: string;
+  selltime: string;
 }
 
 export interface TradeDeletePayload {

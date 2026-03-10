@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useTrades, useCreateTrade, useDeleteTrade } from "@/hooks/useTrades";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import TradeTable from "@/components/TradeTable";
 import TradeForm from "@/components/TradeForm";
 import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
-import { Plus, LogOut, TrendingUp, RefreshCw } from "lucide-react";
+import { Plus, LogOut, TrendingUp, RefreshCw, History } from "lucide-react";
 import { toast } from "sonner";
 import { TradeCreatePayload } from "@/types/trade";
 
@@ -19,6 +19,14 @@ const Dashboard = () => {
   const { data: trades = [], isLoading, refetch } = useTrades();
   const createTrade = useCreateTrade();
   const deleteTrade = useDeleteTrade();
+
+  const todayTrades = useMemo(() => {
+    const today = new Date().toISOString().split("T")[0];
+    return trades.filter((t) => {
+      const tradeDate = new Date(t.date).toISOString().split("T")[0];
+      return tradeDate === today;
+    });
+  }, [trades]);
 
   const handleCreate = async (data: TradeCreatePayload) => {
     try {
@@ -70,7 +78,7 @@ const Dashboard = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight sm:text-2xl">Investment Logger</h1>
-              <p className="text-sm text-muted-foreground">Track & analyze your trades</p>
+              <p className="text-sm text-muted-foreground">Today's trades</p>
             </div>
           </div>
 
@@ -82,6 +90,14 @@ const Dashboard = () => {
               className="border-border text-muted-foreground hover:bg-secondary"
             >
               <RefreshCw className="mr-1.5 h-4 w-4" /> Refresh
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/trades")}
+              className="border-border text-muted-foreground hover:bg-secondary"
+            >
+              <History className="mr-1.5 h-4 w-4" /> All Trades
             </Button>
             <Button
               size="sm"
@@ -108,7 +124,7 @@ const Dashboard = () => {
           transition={{ delay: 0.15 }}
           className="mb-6"
         >
-          <StatsBar trades={trades} />
+          <StatsBar trades={todayTrades} />
         </motion.div>
 
         {/* Trade Table */}
@@ -122,7 +138,7 @@ const Dashboard = () => {
               <RefreshCw className="h-6 w-6 animate-spin text-primary" />
             </div>
           ) : (
-            <TradeTable trades={trades} onDelete={handleDelete} deleting={deletingId} />
+            <TradeTable trades={todayTrades} onDelete={handleDelete} deleting={deletingId} />
           )}
         </motion.div>
       </div>

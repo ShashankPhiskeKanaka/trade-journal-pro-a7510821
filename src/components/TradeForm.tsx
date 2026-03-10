@@ -15,12 +15,12 @@ interface TradeFormProps {
 const TradeForm = ({ onSubmit, onClose, loading, initialData }: TradeFormProps) => {
   const [form, setForm] = useState<TradeCreatePayload>({
     name: initialData?.name || "",
-    buyVal: initialData?.buyVal || 0,
-    sellVal: initialData?.sellVal || 0,
+    buyval: initialData?.buyval || 0,
+    sellval: initialData?.sellval || 0,
     quantity: initialData?.quantity || 0,
     date: initialData?.date || new Date().toISOString().split("T")[0],
-    buyTime: initialData?.buyTime || "",
-    sellTime: initialData?.sellTime || "",
+    buytime: initialData?.buytime || "",
+    selltime: initialData?.selltime || "",
   });
 
   const handleChange = (field: keyof TradeCreatePayload, value: string | number) => {
@@ -34,12 +34,12 @@ const TradeForm = ({ onSubmit, onClose, loading, initialData }: TradeFormProps) 
 
   const fields: { key: keyof TradeCreatePayload; label: string; type: string; step?: string }[] = [
     { key: "name", label: "Trade Name", type: "text" },
-    { key: "buyVal", label: "Buy Value", type: "number", step: "0.01" },
-    { key: "sellVal", label: "Sell Value", type: "number", step: "0.01" },
+    { key: "buyval", label: "Buy Value", type: "number", step: "0.01" },
+    { key: "sellval", label: "Sell Value", type: "number", step: "0.01" },
     { key: "quantity", label: "Quantity", type: "number", step: "1" },
     { key: "date", label: "Date", type: "date" },
-    { key: "buyTime", label: "Buy Time", type: "time" },
-    { key: "sellTime", label: "Sell Time", type: "time" },
+    { key: "buytime", label: "Buy Time", type: "time" },
+    { key: "selltime", label: "Sell Time", type: "time" },
   ];
 
   return (
