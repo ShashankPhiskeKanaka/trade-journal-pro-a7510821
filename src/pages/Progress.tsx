@@ -49,7 +49,7 @@ const Progress = () => {
       cumNet += pl - charges;
       const d = new Date(date);
       return {
-        date: `${d.getDate()}/${d.getMonth() + 1}`,
+        date: `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`,
         cumPL: parseFloat(cumPL.toFixed(2)),
         cumNet: parseFloat(cumNet.toFixed(2)),
       };
