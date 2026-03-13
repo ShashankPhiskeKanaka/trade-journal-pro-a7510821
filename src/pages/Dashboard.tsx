@@ -98,6 +98,14 @@ const Dashboard = () => {
               <History className="mr-1.5 h-4 w-4" /> All Trades
             </Button>
             <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/progress")}
+              className="border-border text-muted-foreground hover:bg-secondary"
+            >
+              <LineChart className="mr-1.5 h-4 w-4" /> Progress
+            </Button>
+            <Button
               size="sm"
               onClick={() => setShowForm(true)}
               className="bg-primary font-semibold text-primary-foreground hover:bg-primary/90"
