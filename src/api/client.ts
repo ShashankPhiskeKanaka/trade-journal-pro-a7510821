@@ -1,6 +1,6 @@
 import { Trade, TradeCreatePayload } from "@/types/trade";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_BASE = import.meta.env.VITE_API_URL || "https://investmentloggerbackend.netlify.app/.netlify/functions";
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${url}`, {
