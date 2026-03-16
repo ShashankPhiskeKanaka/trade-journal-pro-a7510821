@@ -2,14 +2,35 @@ import { Trade, TradeCreatePayload } from "@/types/trade";
 
 const API_BASE = import.meta.env.VITE_API_URL || "https://investmentloggerbackend.netlify.app/.netlify/functions/server";
 
+// Simple token storage
+let authToken: string | null = localStorage.getItem("auth_token");
+
+export function setAuthToken(token: string | null) {
+  authToken = token;
+  if (token) {
+    localStorage.setItem("auth_token", token);
+  } else {
+    localStorage.removeItem("auth_token");
+  }
+}
+
+export function getAuthToken() {
+  return authToken;
+}
+
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(options?.headers as Record<string, string>),
+  };
+
+  if (authToken) {
+    headers["Authorization"] = `Bearer ${authToken}`;
+  }
+
   const res = await fetch(`${API_BASE}${url}`, {
     ...options,
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
+    headers,
   });
 
   if (!res.ok) {
@@ -38,12 +59,20 @@ export const tradeApi = {
 };
 
 export const authApi = {
-  login: (email: string, password: string) =>
-    request<{ message: string }>("/auth/login", {
+  login: async (email: string, password: string) => {
+    const res = await request<{ message: string; token?: string }>("/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
-    }),
+    });
+    if (res.token) {
+      setAuthToken(res.token);
+    }
+    return res;
+  },
 
-  logout: () =>
-    request<void>("/auth/logout", { method: "POST" }),
+  logout: async () => {
+    const res = await request<void>("/auth/logout", { method: "POST" });
+    setAuthToken(null);
+    return res;
+  },
 };
