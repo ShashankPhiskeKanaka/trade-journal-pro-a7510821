@@ -2,16 +2,11 @@ import { Trade, TradeCreatePayload } from "@/types/trade";
 
 const API_BASE = import.meta.env.VITE_API_URL || "https://investmentloggerbackend.netlify.app/.netlify/functions/server";
 
-// Simple token storage
-let authToken: string | null = localStorage.getItem("auth_token");
+// In-memory token — lost on refresh (user must re-login)
+let authToken: string | null = null;
 
 export function setAuthToken(token: string | null) {
   authToken = token;
-  if (token) {
-    localStorage.setItem("auth_token", token);
-  } else {
-    localStorage.removeItem("auth_token");
-  }
 }
 
 export function getAuthToken() {
