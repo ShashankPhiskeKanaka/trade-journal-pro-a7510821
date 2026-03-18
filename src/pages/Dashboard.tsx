@@ -7,7 +7,7 @@ import TradeTable from "@/components/TradeTable";
 import TradeForm from "@/components/TradeForm";
 import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
-import { Plus, LogOut, TrendingUp, RefreshCw, History, LineChart } from "lucide-react";
+import { Plus, LogOut, TrendingUp, RefreshCw, History, LineChart, CalendarDays } from "lucide-react";
 import { toast } from "sonner";
 import { TradeCreatePayload } from "@/types/trade";
 
@@ -100,10 +100,18 @@ const Dashboard = () => {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => navigate("/progress")}
+onClick={() => navigate("/progress")}
               className="border-border text-muted-foreground hover:bg-secondary"
             >
               <LineChart className="mr-1.5 h-4 w-4" /> Progress
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/calendar")}
+              className="border-border text-muted-foreground hover:bg-secondary"
+            >
+              <CalendarDays className="mr-1.5 h-4 w-4" /> Calendar
             </Button>
             <Button
               size="sm"
