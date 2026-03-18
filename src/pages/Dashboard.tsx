@@ -100,7 +100,7 @@ const Dashboard = () => {
             <Button
               variant="outline"
               size="sm"
-/             onClick={() => navigate("/progress")}
+onClick={() => navigate("/progress")}
               className="border-border text-muted-foreground hover:bg-secondary"
             >
               <LineChart className="mr-1.5 h-4 w-4" /> Progress
